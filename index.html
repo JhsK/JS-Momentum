@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/c74aba1045.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -21,13 +22,33 @@
             </div>
             <div class="input-container">
                 <form class="name-container">
-                    <input type="text" id="jsInputName" value="이름을 입력해주세요">
+                    <input type="text" class="inputName" id="jsInputName" value="이름을 입력해주세요">
                 </form>
                 <form class="work-container">
-                    <input type="text" id="jsInputWork" placeholder="할 일을 입력해주세요">
+                    <input type="text" class="inputWork" id="jsInputWork" placeholder="할 일을 입력해주세요">
                 </form>    
             </div>
-        </div>    
+        </div>
+        <div class="bottom-container">
+            <div class="schedule-title">
+                <i class="far fa-calendar-times"></i>
+                <span>Schedule</span>
+            </div>
+            <div class="schedule-container">
+                <div class="schedule">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="finished-title">
+                <i class="far fa-calendar-check"></i>
+                <span>Finished</span>
+            </div>
+            <div class="finished-container">
+                <div class="finished">
+                    <ul></ul>
+                </div>
+            </div>        
+        </div>
     </div>
     <script src="./js/clock.js"></script>
     <script src="./js/name.js"></script>
