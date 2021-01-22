@@ -8,7 +8,7 @@ const renewClock = () => {
 
   clock.innerText = `${clockHours < 10 ? `0${clockHours}` : clockHours}:${
     clockMinutes < 10 ? `0${clockMinutes}` : clockMinutes
-  }:${clockSeconds < 10 ? `0${clockSeconds}` : clockSeconds}`${clockHours > 12 ? `PM` : };
+  }:${clockSeconds < 10 ? `0${clockSeconds}` : clockSeconds}`;
 };
 
 function init() {
