@@ -29,5 +29,17 @@ body {
 }
 
 h1 {
+  margin: 0;
+}
+
+.main-flex-container h1 {
   font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
