@@ -119,6 +119,23 @@ h1 {
   margin-right: 3rem;
 }
 
+.ul-schedule {
+  margin-top: 2rem;
+  list-style: url("../image/rec.png");
+}
+
+.ul-schedule li {
+  height: 30px;
+  line-height: 30px;
+}
+
+ul button {
+  background-color: transparent;
+  border-style: none;
+  outline: none;
+  padding: 0;
+}
+
 .finished-title {
   position: absolute;
   top: 8%;

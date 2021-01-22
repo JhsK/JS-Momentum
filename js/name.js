@@ -1,5 +1,5 @@
 const inputName = document.querySelector("#jsInputName");
-const form = document.querySelector(".input-container");
+const nameForm = document.querySelector(".input-container");
 const NAME = "NAME";
 
 const loadName = () => {
@@ -20,7 +20,7 @@ const submitName = (event) => {
 
 function init() {
   loadName();
-  form.addEventListener("submit", submitName);
+  nameForm.addEventListener("submit", submitName);
 }
 
 init();
