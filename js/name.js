@@ -7,14 +7,15 @@ const loadName = () => {
 
   if (currentName !== null) {
     inputName.value = currentName;
+    inputName.classList.add("getName");
   }
 };
 
 const submitName = (event) => {
   event.preventDefault();
   const writeName = inputName.value;
-  console.log(writeName);
   localStorage.setItem(NAME, writeName);
+  inputName.classList.add("getName");
 };
 
 function init() {

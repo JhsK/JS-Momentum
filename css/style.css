@@ -33,7 +33,7 @@ h1 {
 }
 
 .main-flex-container h1 {
-  font-size: 5rem;
+  font-size: 7rem;
   margin-bottom: 2rem;
 }
 
@@ -42,4 +42,28 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.inputName {
+  width: 400px;
+  height: 100px;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 7px;
+  border-style: none;
+  color: #fff;
+  outline: none;
+  text-align: center;
+}
+
+.getName {
+  width: 200px;
+  height: 100px;
+  font-size: 3rem;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 7px;
+  border-style: none;
+  color: #fff;
+  outline: none;
+  text-align: center;
 }
