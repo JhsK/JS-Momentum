@@ -10,21 +10,41 @@ let scheduleValue = [];
 let finishedValue = [];
 
 const clickClearBtn = (event) => {
+  let btnText = "";
   const eventTarget = event.target.parentNode;
-  const btnText = "⏪";
-  const renewFinishedValue = scheduleValue.filter((finValue) => {
-    return finValue.id === Number(eventTarget.id);
-  });
+  const temp = eventTarget.parentNode.classList.value;
 
-  clickDelBtn(event);
-  createSchedule(
-    renewFinishedValue[0].text,
-    btnText,
-    ulFinished,
-    renewFinishedValue[0].id
-  );
-  finishedValue.push(renewFinishedValue[0]);
-  saveFinished();
+  if (temp === "ul-schedule") {
+    btnText = "⏪";
+    const renewFinishedValue = scheduleValue.filter((finValue) => {
+      return finValue.id === Number(eventTarget.id);
+    });
+
+    clickDelBtn(event);
+    createSchedule(
+      renewFinishedValue[0].text,
+      btnText,
+      ulFinished,
+      renewFinishedValue[0].id
+    );
+    finishedValue.push(renewFinishedValue[0]);
+    saveFinished();
+  } else if (temp === "ul-finished") {
+    btnText = "✅";
+    const renewScheduleValue = finishedValue.filter((scValue) => {
+      return scValue.id === Number(eventTarget.id);
+    });
+
+    clickDelBtn(event);
+    createSchedule(
+      renewScheduleValue[0].text,
+      btnText,
+      ulSchedule,
+      renewScheduleValue[0].id
+    );
+    scheduleValue.push(renewScheduleValue[0]);
+    saveSchedule();
+  }
 };
 
 const clickDelBtn = (event) => {
