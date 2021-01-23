@@ -9,7 +9,20 @@ const FINISHED = "FINISHED";
 let scheduleValue = [];
 let finishedValue = [];
 
-const createSchedule = (spanText, btnText, location) => {
+const clickDelBtn = (event) => {
+  const eventTarget = event.target.parentNode;
+  const eventTargetParent = eventTarget.parentNode;
+  const renewScheduleValue = scheduleValue.filter((scValue) => {
+    return scValue.id !== Number(eventTarget.id);
+  });
+
+  scheduleValue = renewScheduleValue;
+  saveSchedule();
+
+  eventTargetParent.removeChild(eventTarget);
+};
+
+const createSchedule = (spanText, btnText, location, id) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const delBtn = document.createElement("button");
@@ -23,6 +36,10 @@ const createSchedule = (spanText, btnText, location) => {
   li.appendChild(delBtn);
   li.appendChild(clearBtn);
   location.appendChild(li);
+  li.id = id;
+
+  delBtn.addEventListener("click", clickDelBtn);
+  // clearBtn.addEventListener("click", clickClearBtn);
 };
 
 const loadSchedule = () => {
@@ -32,11 +49,16 @@ const loadSchedule = () => {
     const parseCurrentSchedule = JSON.parse(currentSchedule);
     const clearBtn = "⏩";
 
-    Array.from(parseCurrentSchedule).forEach((scheduleValue) => {
-      createSchedule(scheduleValue.text, clearBtn, ulSchedule);
+    Array.from(parseCurrentSchedule).forEach((scheduleValues) => {
+      createSchedule(
+        scheduleValues.text,
+        clearBtn,
+        ulSchedule,
+        scheduleValues.id
+      );
     });
 
-    scheduleValue.push(parseCurrentSchedule);
+    scheduleValue = parseCurrentSchedule;
   }
 };
 
@@ -47,6 +69,8 @@ const saveSchedule = () => {
 const submitWork = (event) => {
   event.preventDefault();
   const submitSchedule = input.value;
+  const liId = scheduleValue.length + 1;
+  input.value = "";
   const clearBtn = "⏩";
   const scheduleObj = {
     text: submitSchedule,
@@ -55,7 +79,7 @@ const submitWork = (event) => {
 
   scheduleValue.push(scheduleObj);
   saveSchedule();
-  createSchedule(submitSchedule, clearBtn, ulSchedule);
+  createSchedule(submitSchedule, clearBtn, ulSchedule, liId);
 };
 
 function init() {
