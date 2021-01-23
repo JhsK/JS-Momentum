@@ -1,7 +1,7 @@
 const workForm = document.querySelector(".work-container");
 const input = workForm.querySelector("#jsInputWork");
 const ulSchedule = document.querySelector(".ul-schedule");
-const ulFinished = document.querySelectorAll(".ul-finished");
+const ulFinished = document.querySelector(".ul-finished");
 
 const SCHEDULE = "SCHEDULE";
 const FINISHED = "FINISHED";
@@ -9,15 +9,44 @@ const FINISHED = "FINISHED";
 let scheduleValue = [];
 let finishedValue = [];
 
+const clickClearBtn = (event) => {
+  const eventTarget = event.target.parentNode;
+  const btnText = "⏪";
+  const renewFinishedValue = scheduleValue.filter((finValue) => {
+    return finValue.id === Number(eventTarget.id);
+  });
+
+  clickDelBtn(event);
+  createSchedule(
+    renewFinishedValue[0].text,
+    btnText,
+    ulFinished,
+    renewFinishedValue[0].id
+  );
+  finishedValue.push(renewFinishedValue[0]);
+  saveFinished();
+};
+
 const clickDelBtn = (event) => {
   const eventTarget = event.target.parentNode;
   const eventTargetParent = eventTarget.parentNode;
-  const renewScheduleValue = scheduleValue.filter((scValue) => {
-    return scValue.id !== Number(eventTarget.id);
-  });
+  const temp = eventTargetParent.classList.value; // string
 
-  scheduleValue = renewScheduleValue;
-  saveSchedule();
+  if (temp === "ul-schedule") {
+    const renewScheduleValue = scheduleValue.filter((scValue) => {
+      return scValue.id !== Number(eventTarget.id);
+    });
+
+    scheduleValue = renewScheduleValue;
+    saveSchedule();
+  } else if (temp === "ul-finished") {
+    const renewFinishedValue = finishedValue.filter((finValue) => {
+      return finValue.id !== Number(eventTarget.id);
+    });
+
+    finishedValue = renewFinishedValue;
+    saveFinished();
+  }
 
   eventTargetParent.removeChild(eventTarget);
 };
@@ -39,7 +68,7 @@ const createSchedule = (spanText, btnText, location, id) => {
   li.id = id;
 
   delBtn.addEventListener("click", clickDelBtn);
-  // clearBtn.addEventListener("click", clickClearBtn);
+  clearBtn.addEventListener("click", clickClearBtn);
 };
 
 const loadSchedule = () => {
@@ -47,7 +76,7 @@ const loadSchedule = () => {
 
   if (currentSchedule !== null) {
     const parseCurrentSchedule = JSON.parse(currentSchedule);
-    const clearBtn = "⏩";
+    const clearBtn = "✅";
 
     Array.from(parseCurrentSchedule).forEach((scheduleValues) => {
       createSchedule(
@@ -62,8 +91,32 @@ const loadSchedule = () => {
   }
 };
 
+const loadFinished = () => {
+  const currentFinished = localStorage.getItem(FINISHED);
+
+  if (currentFinished !== null) {
+    const parseCurrentFinished = JSON.parse(currentFinished);
+    const clearBtn = "⏪";
+
+    Array.from(parseCurrentFinished).forEach((finishedValues) => {
+      createSchedule(
+        finishedValues.text,
+        clearBtn,
+        ulFinished,
+        finishedValues.id
+      );
+    });
+
+    finishedValue = parseCurrentFinished;
+  }
+};
+
 const saveSchedule = () => {
   localStorage.setItem(SCHEDULE, JSON.stringify(scheduleValue));
+};
+
+const saveFinished = () => {
+  localStorage.setItem(FINISHED, JSON.stringify(finishedValue));
 };
 
 const submitWork = (event) => {
@@ -71,7 +124,7 @@ const submitWork = (event) => {
   const submitSchedule = input.value;
   const liId = scheduleValue.length + 1;
   input.value = "";
-  const clearBtn = "⏩";
+  const clearBtn = "✅";
   const scheduleObj = {
     text: submitSchedule,
     id: scheduleValue.length + 1,
@@ -84,6 +137,7 @@ const submitWork = (event) => {
 
 function init() {
   loadSchedule();
+  loadFinished();
   workForm.addEventListener("submit", submitWork);
 }
 
