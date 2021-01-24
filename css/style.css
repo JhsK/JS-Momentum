@@ -196,3 +196,39 @@ ul button {
   margin-top: 2rem;
   list-style: url("../image/rec.png");
 }
+
+@media only screen and (max-width: 780px) {
+  .bg {
+    height: 120vh;
+  }
+
+  .bottom-container {
+    bottom: 1%;
+    height: 500px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .schedule-title {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .schedule-container {
+    padding: 0;
+    margin: 2rem 0 4rem 0;
+  }
+
+  .finished-container {
+    padding: 0;
+    margin: 0;
+    height: 400px;
+  }
+
+  .finished-title {
+    top: 50%;
+    right: 50%;
+    transform: translate(+50%, +20%);
+  }
+}
