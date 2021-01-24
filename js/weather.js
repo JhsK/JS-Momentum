@@ -1,18 +1,34 @@
+const spanWeather = document.querySelector(".jsWeather");
+
 const API_KEY = "9bbfaa1e592ee0e289f83512ad6b59c3";
 const SECTION = "SECTION";
+
+const getWeather = (lat, lng) => {
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      const temperature = json.main.temp;
+      const place = json.name;
+      spanWeather.innerText = `온도: ${temperature}℃ - 위치: ${place}`;
+    });
+};
 
 const geoSuccess = (position) => {
   const sectionLatitude = position.coords.latitude;
   const sectionLongitude = position.coords.longitude;
   const sectionObject = {
-    latitude, // latitude: latitude
-    longitude, // longitude: longitude
+    latitude: sectionLatitude,
+    longitude: sectionLongitude,
   };
   localStorage.setItem(SECTION, JSON.stringify(sectionObject));
 };
 
 const getError = () => {
-  // 위치 정보 못 받아왔을 때 span 태그에 안내 문구 나올 수 있도록 추가 예정
+  spanWeather.innerText = "날씨, 위치 정보 동기화를 실패하였습니다.";
 };
 
 const askSection = () => {
@@ -25,8 +41,8 @@ const loadSection = () => {
   if (currentSection === null) {
     askSection();
   } else {
-    const parseSeciont = JSON.parse(currentSection);
-    //
+    const parseSection = JSON.parse(currentSection);
+    getWeather(parseSection.latitude, parseSection.longitude);
   }
 };
 
