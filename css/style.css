@@ -279,4 +279,14 @@ ul button {
     right: 50%;
     transform: translate(+50%, +20%);
   }
+
+  .modal-container {
+    width: 400px;
+    height: 550px;
+    font-size: 0.8rem;
+  }
+
+  .modal-close {
+    right: -7%;
+  }
 }
