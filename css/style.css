@@ -16,6 +16,33 @@ body {
   background-position: center;
 }
 
+h1 {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.info-container {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.info-icon {
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+.info-icon:hover {
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
 .main-container {
   position: absolute;
   top: 30%;
@@ -28,20 +55,13 @@ body {
   color: #fff;
 }
 
-h1 {
-  margin: 0;
-}
-
-button {
-  cursor: pointer;
-}
-
 .main-flex-container h1 {
   font-size: 7rem;
   margin-bottom: 0.3rem;
 }
 
 .jsWeather {
+  color: #ffcdd2;
 }
 
 .input-container {
