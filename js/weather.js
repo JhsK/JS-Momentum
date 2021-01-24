@@ -25,6 +25,7 @@ const geoSuccess = (position) => {
     longitude: sectionLongitude,
   };
   localStorage.setItem(SECTION, JSON.stringify(sectionObject));
+  getWeather(sectionObject.latitude, sectionObject.longitude);
 };
 
 const getError = () => {
